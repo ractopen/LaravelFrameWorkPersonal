@@ -14,11 +14,11 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
+     * Only email and password (plain text)
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
@@ -29,20 +29,19 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        // Password visible in database (plain text for learning)
     ];
 
     /**
      * Get the attributes that should be cast.
+     * NO password hashing - plain text storage
      *
      * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            // No casts - plain text password
         ];
     }
 }

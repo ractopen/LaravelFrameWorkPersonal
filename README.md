@@ -18,7 +18,7 @@ This project uses a branch-per-task workflow.
 | Branch | Purpose |
 |--------|---------|
 | `main` | Base Laravel template for copying |
-| `task-*` | Individual tasks (e.g., `task-1-authentication`, `task-2-crud`) |
+| `task-connectToPGSQL` | Task 2: Connect a simple login/signup to PostgreSQL |
 
 ### Workflow
 
@@ -64,6 +64,128 @@ php artisan serve
 - **Database:** Configurable (SQLite, MySQL, PostgreSQL, etc.)
 - **Frontend:** Blade Templates, Vite
 - **Version Control:** Git & GitHub
+
+---
+
+## Branch: `task-connectToPGSQL` - Simple Login/Register with PostgreSQL
+
+### Overview
+Basic authentication system with **email and password only**, connected to PostgreSQL via pgAdmin.
+
+**Sessions stored in database** - You can see active logins in pgAdmin!
+
+#### 🔹 Register Button Flow
+```
+User fills form → Clicks "Register" →
+1. POST /register
+2. Check if email exists in PostgreSQL
+3. If exists → Error: "User already exists"
+4. If new → Save plain text password to database
+5. Redirect to /login
+```
+
+#### 🔹 Login Button Flow
+```
+User fills form → Clicks "Login" →
+1. POST /login
+2. Search PostgreSQL for email
+3. If not found → Error: "Invalid credentials"
+4. If found → Compare plain text password
+5. If wrong → Error: "Invalid credentials"
+6. If correct → Create session in database → Redirect to / (welcome)
+
+SESSION CREATION:
+├─ Generate random session ID (e.g., "abc123xyz...")
+├─ Store in sessions table: user_id, email, IP, browser info
+├─ Send session ID to browser as cookie
+└─ User stays logged in on all pages
+```
+
+#### 🔹 Logout Button Flow
+```
+User clicks "Logout" →
+1. POST /logout
+2. Delete session from database (removes row from sessions table)
+3. Clear browser cookie
+4. Redirect to /login
+```
+
+### How Database Sessions Work
+
+**Visual Flow:**
+```
+LOGIN:
+Browser → Sends email/password → Laravel
+Laravel → Checks PostgreSQL users table → Valid!
+Laravel → Creates session row in sessions table
+Laravel → Sends session ID cookie → Browser
+Browser → Stores cookie
+
+NEXT PAGE VISIT:
+Browser → Sends cookie with session ID → Laravel
+Laravel → Looks up session ID in sessions table
+Laravel → Finds user_id → User is logged in!
+Laravel → Shows protected content
+
+LOGOUT:
+Browser → Clicks logout → Laravel
+Laravel → Deletes row from sessions table
+Laravel → Clears cookie → Browser
+Browser → No longer logged in
+```
+
+**What's in the sessions table:**
+```
+id          | user_id | ip_address  | user_agent           | payload        | last_activity
+------------|---------|-------------|----------------------|----------------|---------------
+abc123xyz   | 1       | 127.0.0.1   | Chrome/Windows       | {user data}    | 1728619200
+def456uvw   | 2       | 192.168.1.5 | Firefox/Mac          | {user data}    | 1728619150
+```
+
+**Benefits of Database Sessions:**
+- ✅ View all logged-in users in pgAdmin
+- ✅ See when they were last active
+- ✅ See their IP addresses and browsers
+- ✅ Manually delete sessions to force logout
+- ✅ Track user activity
+
+### Setup Instructions
+
+**1. Configure Laravel .env**
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=connectToDatabasePGSQL
+DB_USERNAME=postgres
+DB_PASSWORD=your_password_here
+```
+
+**2. Run Migration**
+```bash
+php artisan migrate  # Creates users table in PostgreSQL
+```
+
+**3. Start Server**
+```bash
+php artisan serve
+# Visit: http://localhost:8000
+```
+
+### Files Created/Modified
+
+- `resources/views/register.blade.php` - Registration form (email + password)
+- `resources/views/login.blade.php` - Login form (email + password)
+- `resources/views/welcome.blade.php` - Dashboard after login
+- `routes/web.php` - Routes with detailed comments
+- `database/migrations/0001_01_01_000000_create_users_table.php` - Simple users table
+- `.env.example` - PostgreSQL configuration
+
+### Key Features
+
+✅ Email uniqueness check (prevents duplicate users)  
+✅ Plain text password storage (easy to view in database)  
+✅ Clear flow explanations with keypoints in all files  
 
 ---
 
