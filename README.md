@@ -3,115 +3,68 @@
 <p align="center">
 <img src="https://img.shields.io/badge/Laravel-v12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Version">
 <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP Version">
-<img src="https://img.shields.io/badge/Status-Learning-green?style=for-the-badge" alt="Status">
 </p>
 
-# 🎓 Laravel Framework Personal
+# Laravel Framework Personal
 
-> A Laravel learning repository for my OOP course - tracking my journey from beginner to proficient.
+A Laravel learning repository. Each branch represents a different task or exercise.
 
-## 📚 About This Repository
+## Repository Structure
 
-This repository documents my progress through Laravel assignments and exercises as a **2nd year Computer Science student**. Each branch represents a specific task or concept I've learned, making it easy to review my growth throughout the course.
-
-## 🌳 Repository Structure
-
-This project uses a **branch-per-task workflow** to keep each assignment isolated and organized.
+This project uses a branch-per-task workflow.
 
 ### Branch Organization
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | 🏠 Base Laravel installation (clean slate) |
-| `development` | 🚧 Active development and experimentation |
-| `task-*` | 📝 Individual assignments (e.g., `task-1-authentication`, `task-2-crud`) |
+| `main` | Base Laravel template for copying |
+| `task-*` | Individual tasks (e.g., `task-1-authentication`, `task-2-crud`) |
 
-### 🔄 My Workflow
+### Workflow
 
 ```bash
-# 1. Create a new branch for each task
+# Create a new branch for each task
 git checkout -b task-name
 
-# 2. Complete the assignment
-# ... code, code, code ...
+# Work on the task
+# ...
 
-# 3. Commit and push
+# Commit and push
 git add .
 git commit -m "Complete task: description"
 git push -u origin task-name
-
-# 4. Switch back to development for next task
-git checkout development
 ```
 
-This approach lets me:
-- ✅ Keep each task isolated and clean
-- ✅ Easily review past work
-- ✅ Track my learning progression
-- ✅ Showcase specific skills per branch
-
-## 🚀 Setup Instructions
-
-Want to run this project on another device? Follow these steps:
+## Setup Instructions
 
 ```bash
 # Clone the repository
 git clone https://github.com/ractopen/LaravelFrameWorkPersonal.git
 cd LaravelFrameWorkPersonal
 
-# Install PHP dependencies
+# Install dependencies
 composer install
-
-# Install Node dependencies
 npm install
 
-# Setup environment file
+# Setup environment
 cp .env.example .env
-
-# Generate application key
 php artisan key:generate
 
-# Setup SQLite database
-touch database/database.sqlite
-
-# Run migrations
+# Setup database (adjust based on your database choice)
+touch database/database.sqlite  # For SQLite
 php artisan migrate
 
-# Start the development server
+# Start server
 php artisan serve
 ```
 
-Visit `http://localhost:8000` in your browser! 🎉
-
-## 📖 Course Information
-
-- **Course:** Object-Oriented Programming (OOP)
-- **Institution:** Computer Science Program
-- **Year:** 2nd Year
-- **Framework:** Laravel 12.x
-- **Purpose:** Hands-on learning and skill development
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend:** Laravel (PHP Framework)
-- **Database:** SQLite (Development)
+- **Database:** Configurable (SQLite, MySQL, PostgreSQL, etc.)
 - **Frontend:** Blade Templates, Vite
 - **Version Control:** Git & GitHub
 
-## 📝 Learning Goals
-
-Throughout this course, I'm working on:
-- 🎯 Understanding MVC architecture
-- 🎯 Building RESTful APIs
-- 🎯 Database design and migrations
-- 🎯 Authentication and authorization
-- 🎯 CRUD operations
-- 🎯 Laravel best practices
-
-## 📫 Contact
-
-Feel free to explore the branches to see my progress on different tasks!
-
 ---
 
-<p align="center">Made with ❤️ by a CS student learning Laravel</p>
+<p align="center">Laravel learning repository</p>
