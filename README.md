@@ -70,7 +70,7 @@ php artisan serve
 ## Branch: `task-connectToPGSQL` - Simple Login/Register with PostgreSQL
 
 ### Overview
-Basic authentication system with **email and password only**, connected to PostgreSQL via pgAdmin.
+Basic authentication system with **username and password only**, connected to PostgreSQL via pgAdmin.
 
 **Sessions stored in database** - You can see active logins in pgAdmin!
 
@@ -78,25 +78,31 @@ Basic authentication system with **email and password only**, connected to Postg
 ```
 User fills form → Clicks "Register" →
 1. POST /register
-2. Check if email exists in PostgreSQL
+2. Check if username exists in PostgreSQL
 3. If exists → Error: "User already exists"
 4. If new → Save plain text password to database
 5. Redirect to /login
+
+SESSION CREATION:
+├─ Generate random session ID (e.g., "abc123xyz...")
+├─ Store in sessions table: user_id, username, IP, browser info
+├─ Send session ID to browser as cookie
+└─ User stays logged in on all pages
 ```
 
 #### 🔹 Login Button Flow
 ```
 User fills form → Clicks "Login" →
 1. POST /login
-2. Search PostgreSQL for email
-3. If not found → Error: "Invalid credentials"
+2. Search PostgreSQL for username
+3. If not found → Show error "Invalid credentials"
 4. If found → Compare plain text password
-5. If wrong → Error: "Invalid credentials"
+5. If wrong → Show error "Invalid credentials"
 6. If correct → Create session in database → Redirect to / (welcome)
 
 SESSION CREATION:
 ├─ Generate random session ID (e.g., "abc123xyz...")
-├─ Store in sessions table: user_id, email, IP, browser info
+├─ Store in sessions table: user_id, username, IP, browser info
 ├─ Send session ID to browser as cookie
 └─ User stays logged in on all pages
 ```
@@ -174,8 +180,8 @@ php artisan serve
 
 ### Files Created/Modified
 
-- `resources/views/register.blade.php` - Registration form (email + password)
-- `resources/views/login.blade.php` - Login form (email + password)
+- `resources/views/register.blade.php` - Registration form (username + password)
+- `resources/views/login.blade.php` - Login form (username + password)
 - `resources/views/welcome.blade.php` - Dashboard after login
 - `routes/web.php` - Routes with detailed comments
 - `database/migrations/0001_01_01_000000_create_users_table.php` - Simple users table
@@ -183,7 +189,7 @@ php artisan serve
 
 ### Key Features
 
-✅ Email uniqueness check (prevents duplicate users)  
+✅ Username uniqueness check (prevents duplicate users)  
 ✅ Plain text password storage (easy to view in database)  
 ✅ Clear flow explanations with keypoints in all files  
 

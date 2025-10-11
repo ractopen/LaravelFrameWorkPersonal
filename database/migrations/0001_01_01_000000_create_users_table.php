@@ -25,7 +25,7 @@ return new class extends Migration
         // USERS TABLE - Simple login/register
         Schema::create('users', function (Blueprint $table) {
             $table->id();                          // Auto-increment ID
-            $table->string('email')->unique();     // Email (must be unique - prevents duplicate accounts)
+            $table->string('username')->unique();  // Username (must be unique - prevents duplicate accounts)
             $table->string('password');            // Plain text password
             $table->timestamps();                  // created_at, updated_at
         });

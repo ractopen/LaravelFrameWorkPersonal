@@ -41,8 +41,8 @@ Route::get('/register', function () {
 
 // POST /register - Handle registration
 Route::post('/register', function (Request $request) {
-    // Check if email already exists
-    $existingUser = User::where('email', $request->email)->first();
+    // Check if username already exists
+    $existingUser = User::where('username', $request->username)->first();
     
     if ($existingUser) {
         return back()->with('error', 'User already exists');
@@ -50,7 +50,7 @@ Route::post('/register', function (Request $request) {
     
     // Create new user with plain text password
     $user = new User();
-    $user->email = $request->email;
+    $user->username = $request->username;
     $user->password = $request->password;  // Plain text password
     $user->save();
     
@@ -68,13 +68,13 @@ Route::get('/login', function () {
 
 // POST /login - Handle login
 Route::post('/login', function (Request $request) {
-    // Find user by email
-    $user = User::where('email', $request->email)->first();
+    // Find user by username
+    $user = User::where('username', $request->username)->first();
     
     // Check if user exists and password matches (plain text comparison)
     if ($user && $user->password === $request->password) {
         // Login success - store user info in session
-        session(['user_id' => $user->id, 'user_email' => $user->email]);
+        session(['user_id' => $user->id, 'user_username' => $user->username]);
         return redirect('/')->with('success', 'Login successful!');
     }
     

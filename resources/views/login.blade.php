@@ -3,9 +3,9 @@
     
     WHAT HAPPENS WHEN YOU CLICK LOGIN:
     1. Form submits to POST /login route
-    2. Controller searches PostgreSQL for user with this email
-    3. If email not found → Show error "Invalid credentials"
-    4. If email found → Compare plain text password
+    2. Controller searches PostgreSQL for user with this username
+    3. If username not found → Show error "Invalid credentials"
+    4. If username found → Compare plain text password
     5. If password wrong → Show error "Invalid credentials"
     6. If password correct → Create session and redirect to / (welcome page)
 --}}
@@ -30,8 +30,8 @@
     <form action="/login" method="POST">
         @csrf
         
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>

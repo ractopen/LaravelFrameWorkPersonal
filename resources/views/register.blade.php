@@ -3,9 +3,9 @@
     
     WHAT HAPPENS WHEN YOU CLICK REGISTER:
     1. Form submits to POST /register route
-    2. Controller checks if email already exists in PostgreSQL
-    3. If email exists → Show error "User already exists"
-    4. If email is new → Save password as plain text to database
+    2. Controller checks if username already exists in PostgreSQL
+    3. If username exists → Show error "User already exists"
+    4. If username is new → Save password as plain text to database
     5. Redirect to /login page
 --}}
 <!DOCTYPE html>
@@ -29,8 +29,8 @@
     <form action="/register" method="POST">
         @csrf
         
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
