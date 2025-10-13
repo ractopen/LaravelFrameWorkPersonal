@@ -3,6 +3,8 @@
 <p align="center">
 <img src="https://img.shields.io/badge/Laravel-v12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Version">
 <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP Version">
+<img src="https://img.shields.io/github/last-commit/ractopen/LaravelFrameWorkPersonal?style=for-the-badge&color=FF2D20" alt="Last Commit">
+<img src="https://img.shields.io/github/repo-size/ractopen/LaravelFrameWorkPersonal?style=for-the-badge&color=FF2D20" alt="Repo Size">
 </p>
 
 # Laravel Framework Personal
