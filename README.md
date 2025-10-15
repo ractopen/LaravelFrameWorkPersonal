@@ -19,8 +19,8 @@ This project uses a branch-per-task workflow.
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Base Laravel template for copying |
-| `task-*` | Individual tasks (e.g., `task-1-authentication`, `task-2-crud`) |
+| [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying |
+| [`task-*`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task-*) | Individual tasks (e.g., `task-1-authentication`, `task-2-crud`) |
 
 ### Workflow
 
@@ -46,7 +46,7 @@ cd LaravelFrameWorkPersonal
 
 # Install dependencies
 composer install
-npm install
+npm install  # Optional: for frontend assets (Vite, etc.)
 
 # Setup environment
 cp .env.example .env
