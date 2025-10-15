@@ -17,9 +17,9 @@ This project uses a branch-per-task workflow.
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Base Laravel template for copying |
-| `task2-routing` | Task 2: Routing in Laravel |
-| `task3-connectToPGSQL` | Task 3: Connect to PostgreSQL |
+| [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying |
+| [`task2-routing`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task2-routing) | Task 2: Routing in Laravel |
+| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task 3: Connect to PostgreSQL |
 
 Use the `main` branch as the base for copying and creating new task branches like `task1-task-name` for each new task.
 
