@@ -18,7 +18,7 @@ This project uses a branch-per-task workflow.
 | Branch | Purpose |
 |--------|---------|
 | `main` | Base Laravel template for copying |
-| `task-connectToPGSQL` | Task 2: Connect a simple login/signup to PostgreSQL |
+| `task3-connectToPGSQL` | Task 2: Connect a simple login/signup to PostgreSQL |
 
 ### Workflow
 
