@@ -70,6 +70,8 @@ php artisan serve
 
 ## Branch: `task-connectToPGSQL` - Simple Login/Register with PostgreSQL
 
+![Demo GIF](assets/e.GIF)
+
 ### Overview
 Basic authentication system with **username and password only**, connected to PostgreSQL via pgAdmin.
 
