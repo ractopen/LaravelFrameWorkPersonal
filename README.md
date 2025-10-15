@@ -17,8 +17,8 @@ This project uses a branch-per-task workflow.
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Base Laravel template for copying |
-| `task3-connectToPGSQL` | Task 2: Connect a simple login/signup to PostgreSQL |
+| [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying |
+| [`task-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task-connectToPGSQL) | Task 2: Connect a simple login/signup to PostgreSQL |
 
 ### Workflow
 
@@ -44,7 +44,7 @@ cd LaravelFrameWorkPersonal
 
 # Install dependencies
 composer install
-npm install
+npm install  # Optional: for frontend assets (Vite, etc.)
 
 # Setup environment
 cp .env.example .env
