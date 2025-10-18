@@ -84,10 +84,10 @@ chmod +x stup.sh
 
 ### Models Creation
 ```bash
-# Create Dojo model with migration, factory, and seeder
+# Create Dojo model with migration
 php artisan make:model Dojo -mfs
 
-# Create Ninja model with migration, factory, and seeder
+# Create Ninja model with migration
 php artisan make:model Ninja -mfs
 ```
 
@@ -105,6 +105,43 @@ php artisan make:controller NinjaController
 # Create views
 dojo.index, ninja.index views created
 ```
+
+## How to Use <a name="how-to-use"></a>
+
+### Using Laravel Tinker
+Laravel Tinker allows you to interact with your application in real-time. Here's how to use it:
+
+```bash
+# Start Tinker
+php artisan tinker
+```
+
+#### Examples
+- **Create a new Dojo**:
+  ```php
+  $dojo = App\Models\Dojo::create([
+      'name' => 'test dojo',
+      'description' => 'elo'
+  ]);
+  ```
+
+- **Create a new Ninja**:
+  ```php
+  $ninja = App\Models\Ninja::create([
+      'name' => 'test ninja',
+      'skill' => 'stealth',
+      'bio' => 'a skilled warrior',
+      'dojo_id' => 1
+  ]);
+  ```
+
+- **Query Ninjas in a Dojo**:
+  ```php
+  $dojo = App\Models\Dojo::find(1);
+  $ninjas = $dojo->ninjas;
+  ```
+
+Use `exit` or Ctrl+D to quit Tinker.
 
 ## Tech Stack <a name="tech-stack"></a>
 
