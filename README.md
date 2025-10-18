@@ -10,6 +10,7 @@
   <a href="#repository-structure">🏗️ Repository</a> •
   <a href="#setup-instructions">⚙️ Setup</a> •
   <a href="#what-i-did">📝 What I Did</a> •
+  <a href="#how-to-use">📖 How to Use</a> •
   <a href="#tech-stack">🛠️ Tech Stack</a>
 </p>
 
@@ -142,6 +143,17 @@ php artisan tinker
   ```
 
 Use `exit` or Ctrl+D to quit Tinker.
+
+![Tinker Demo](tinker.gif)
+
+### Using php artisan serve for UI
+Run the Laravel development server to view the UI:
+
+```bash
+php artisan serve
+```
+
+![UI Demo](ui.gif)
 
 ## Tech Stack <a name="tech-stack"></a>
 
