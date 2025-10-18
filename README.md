@@ -3,13 +3,19 @@
 <p align="center">
 <img src="https://img.shields.io/badge/Laravel-v12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Version">
 <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP Version">
-<img src="https://img.shields.io/github/last-commit/ractopen/LaravelFrameWorkPersonal?style=for-the-badge&color=FF2D20" alt="Last Commit">
-<img src="https://img.shields.io/github/repo-size/ractopen/LaravelFrameWorkPersonal?style=for-the-badge&color=FF2D20" alt="Repo Size">
+<img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql" alt="PostgreSQL Database">
 </p>
 
-# Laravel Framework Personal
+<p align="center">
+  <a href="#repository-structure">🏗️ Repository</a> •
+  <a href="#setup-instructions">⚙️ Setup</a> •
+  <a href="#what-i-did">📝 What I Did</a> •
+  <a href="#tech-stack">🛠️ Tech Stack</a>
+</p>
 
-A Laravel learning repository. Each branch represents a different task or exercise.
+# Laravel Routing
+
+Laravel project demonstrating routing concepts.
 
 ## Repository Structure
 
@@ -21,7 +27,8 @@ This project uses a branch-per-task workflow.
 |--------|---------|
 | [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying |
 | [`task2-routing`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task2-routing) | Task 2: Routing in Laravel |
-| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task 3: Connect to PostgreSQL |
+| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task 3: Connect to PostgreSQL and implement authentication |
+| [`task4-models-eloquent`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task4-models-eloquent) | Task 4: Models and Eloquent Relationships |
 
 ### Workflow
 
@@ -60,6 +67,27 @@ php artisan migrate
 # Start server
 php artisan serve
 ```
+
+## What I Did <a name="what-i-did"></a>
+
+Implemented routing in Laravel:
+
+```bash
+# Define routes in routes/web.php
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/about', function () {
+    return 'About Page';
+});
+
+Route::get('/contact', function () {
+    return 'Contact Page';
+});
+```
+
+This demonstrates basic routing in Laravel for different pages.
 
 ## Tech Stack
 
