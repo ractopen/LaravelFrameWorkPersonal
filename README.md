@@ -59,10 +59,12 @@ cd LaravelFrameWorkPersonal
 composer install
 
 # Setup environment
-cp .env.example .env
+cp .env.example .env || or remove .example
+
+# Regeerate key
 php artisan key:generate
 
-# Setup PostgreSQL database (make sure PostgreSQL is running)
+# Setup PostgreSQL database (make sure PostgreSQL is running) edit .env first
 php artisan migrate
 
 # Start server
@@ -82,11 +84,11 @@ chmod +x stup.sh
 
 ### Models Creation
 ```bash
-# Create Dojo model with migration
-php artisan make:model Dojo -m
+# Create Dojo model with migration, factory, and seeder
+php artisan make:model Dojo -mfs
 
-# Create Ninja model with migration
-php artisan make:model Ninja -m
+# Create Ninja model with migration, factory, and seeder
+php artisan make:model Ninja -mfs
 ```
 
 ### Eloquent Relationships
