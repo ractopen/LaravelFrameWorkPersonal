@@ -51,10 +51,10 @@ git checkout task3-connectToPGSQL
 composer install
 
 # Setup environment
-cp .env.example .env
+cp .env.example .env || or remeove .example at the end of file .env.example to .env
 php artisan key:generate
 
-# Setup PostgreSQL database (make sure PostgreSQL is running)
+# Setup PostgreSQL database (make sure PostgreSQL is running) edit .env first for user and password
 php artisan migrate
 
 # Start server
@@ -63,14 +63,14 @@ php artisan serve
 
 ## What I Did
 
-### Branch: `task-connectToPGSQL` - Simple Login/Register with PostgreSQL
+### Branch: `task-connectToPGSQL` - Simple Login/Register and Session with PostgreSQL
 
 ![Demo GIF](assets/e.GIF)
 
 ### Overview
-Basic authentication system with **username and password only**, connected to PostgreSQL via pgAdmin.
+Basic authentication system with **username and password**, connected to PostgreSQL via pgAdmin.
 
-**Sessions stored in database** - You can see active logins in pgAdmin!
+**Sessions stored in database**
 
 #### 🔹 Register Button Flow
 ```
@@ -145,16 +145,6 @@ id          | user_id | ip_address  | user_agent           | payload        | la
 abc123xyz   | 1       | 127.0.0.1   | Chrome/Windows       | {user data}    | 1728619200
 def456uvw   | 2       | 192.168.1.5 | Firefox/Mac          | {user data}    | 1728619150
 ```
-
-### Key Features
-
-✅ Username uniqueness check (prevents duplicate users)  
-✅ Plain text password storage (easy to view in database)  
-✅ Clear flow explanations with keypoints in all files  
-
-### Videos/GIFs
-- [Demo Video](https://example.com/demo) - Watch the application in action.
-- [GIF Animation](https://example.com/gif) - Quick overview of features.
 
 ## Tech Stack
 
