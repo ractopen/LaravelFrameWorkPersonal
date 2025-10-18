@@ -6,6 +6,13 @@
 <img src="https://camo.githubusercontent.com/27e57f806090b3c8d59044e1dde890e7c7470cc54cd9683a18052561dfef38c6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f44617461626173652d506f737467726553514c2d3333363739313f7374796c653d666f722d7468652d6261646765266c6f676f3d706f737467726573716c" alt="PostgreSQL Database">
 </p>
 
+<p align="center">
+  <a href="#repository-structure">🏗️ Repository</a> •
+  <a href="#setup-instructions">⚙️ Setup</a> •
+  <a href="#what-i-did">📝 What I Did</a> •
+  <a href="#tech-stack">🛠️ Tech Stack</a>
+</p>
+
 # Laravel Framework Personal
 
 A Laravel learning repository for OOP school tasks, focusing on database connections and authentication with PostgreSQL.
@@ -38,6 +45,8 @@ git commit -m "Complete task: description"
 git push -u origin task-name
 ```
 
+## Setup Instructions <a name="setup-instructions"></a>
+
 ### Quick Setup
 
 ```bash
@@ -61,7 +70,7 @@ php artisan migrate
 php artisan serve
 ```
 
-## What I Did
+## What I Did <a name="what-i-did"></a>
 
 ### Branch: `task-connectToPGSQL` - Simple Login/Register and Session with PostgreSQL
 
@@ -146,7 +155,7 @@ abc123xyz   | 1       | 127.0.0.1   | Chrome/Windows       | {user data}    | 17
 def456uvw   | 2       | 192.168.1.5 | Firefox/Mac          | {user data}    | 1728619150
 ```
 
-## Tech Stack
+## Tech Stack <a name="tech-stack"></a>
 
 - **Backend:** Laravel (PHP Framework)
 - **Database:** PostgreSQL
