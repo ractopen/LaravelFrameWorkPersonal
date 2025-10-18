@@ -70,24 +70,22 @@ php artisan serve
 
 ## What I Did <a name="what-i-did"></a>
 
-Implemented routing in Laravel:
+Implemented routing in Laravel, including:
+
+- **Basic Routes:** Defined routes for home, about, and contact pages in `routes/web.php`.
+- **Controllers:** Created controllers to handle routing logic.
 
 ```bash
-# Define routes in routes/web.php
-Route::get('/', function () {
-    return view('welcome');
-});
+# Create a controller
+php artisan make:controller PageController
 
-Route::get('/about', function () {
-    return 'About Page';
-});
-
-Route::get('/contact', function () {
-    return 'Contact Page';
-});
+# Define routes using controllers
+Route::get('/', [PageController::class, 'home']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/contact', [PageController::class, 'contact']);
 ```
 
-This demonstrates basic routing in Laravel for different pages.
+This demonstrates routing with controllers in Laravel for better organization.
 
 ## Tech Stack
 
