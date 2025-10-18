@@ -13,9 +13,9 @@
   <a href="#tech-stack">🛠️ Tech Stack</a>
 </p>
 
-# Laravel Models Eloquent
+# Laravel PostgreSQL Connection
 
-Laravel Models and Eloquent Relationships demonstration with PostgreSQL database.
+Laravel project demonstrating connection to PostgreSQL database.
 
 ## Repository Structure <a name="repository-structure"></a>
 
@@ -80,28 +80,18 @@ chmod +x stup.sh
 
 ## What I Did <a name="what-i-did"></a>
 
-### Models Creation
-```bash
-# Create Dojo model with migration
-php artisan make:model Dojo -m
-
-# Create Ninja model with migration
-php artisan make:model Ninja -m
-```
-
-### Eloquent Relationships
-- **Dojo Model**: Added `ninjas()` relationship (One-to-Many)
-- **Ninja Model**: Added `dojo()` relationship (Many-to-One)
-- **Database**: Created foreign key constraints in migrations
+### Database Setup
+- Configured Laravel to connect to PostgreSQL database
+- Updated `.env.example` with PostgreSQL settings
+- Ensured migrations run successfully with `php artisan migrate`
 
 ### Additional Commands Used
 ```bash
-# Create controllers
-php artisan make:controller DojoController
-php artisan make:controller NinjaController
+# Test database connection
+php artisan migrate:status
 
-# Create views
-dojo.index, ninja.index views created
+# Run migrations
+php artisan migrate
 ```
 
 ## Tech Stack <a name="tech-stack"></a>
