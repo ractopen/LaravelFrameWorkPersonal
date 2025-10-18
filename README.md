@@ -54,7 +54,6 @@ cd LaravelFrameWorkPersonal
 
 # Install dependencies
 composer install
-npm install  # Optional: for frontend assets (Vite, etc.)
 
 # Setup environment
 cp .env.example .env
