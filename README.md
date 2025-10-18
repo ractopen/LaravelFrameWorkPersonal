@@ -1,15 +1,23 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/Laravel-v12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Version">
-<img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP Version">
+<img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel">
+<img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php">
+<img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql">
 </p>
 
-# Laravel Framework Personal
+<p align="center">
+  <a href="#repository-structure">🏗️ Repository</a> •
+  <a href="#setup-instructions">⚙️ Setup</a> •
+  <a href="#what-i-did">📝 What I Did</a> •
+  <a href="#tech-stack">🛠️ Tech Stack</a>
+</p>
 
-A Laravel learning repository. Each branch represents a different task or exercise.
+# Laravel Models Eloquent
 
-## Repository Structure
+Laravel Models and Eloquent Relationships demonstration with PostgreSQL database.
+
+## Repository Structure <a name="repository-structure"></a>
 
 This project uses a branch-per-task workflow.
 
@@ -18,57 +26,89 @@ This project uses a branch-per-task workflow.
 | Branch | Purpose |
 |--------|---------|
 | [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying |
-| [`task2-routing`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task2-routing) | Task 2: Routing in Laravel |
-| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task 3: Connect to PostgreSQL |
-| [`task4-models-eloquent`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task4-models-eloquent) | Task 4: Models and Eloquent in Laravel |
+| [`task2-routing`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task2-routing) | Task: Routing in Laravel |
+| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task: Connect to PostgreSQL |
+| [`task4-models-eloquent`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task4-models-eloquent) | Task: Models and Eloquent |
 
-Use the `main` branch as the base for copying and creating new task branches like `task1-task-name` for each new task.
+Use the `main` branch as the base for copying and creating new task branches like `task1-task-name`, `task2-task-name`, etc. for each new task.
 
 ### Workflow
 
 ```bash
 # Create a new branch for each task
-git checkout -b task-name
+git checkout -b task1-task-name
 
 # Work on the task
 # ...
 
 # Commit and push
 git add .
-git commit -m "Complete task: description"
-git push -u origin task-name
+git commit -m "Complete task1: description"
+git push -u origin task1-task-name
 ```
 
-## Setup Instructions
+## Setup Instructions <a name="setup-instructions"></a>
+
+### Quick Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/ractopen/LaravelFrameWorkPersonal.git
+# Navigate to project directory
 cd LaravelFrameWorkPersonal
 
 # Install dependencies
 composer install
-npm install  # Optional: for frontend assets (Vite, etc.)
 
 # Setup environment
 cp .env.example .env
 php artisan key:generate
 
-# Setup database (adjust based on your database choice)
-touch database/database.sqlite  # For SQLite
+# Setup PostgreSQL database (make sure PostgreSQL is running)
 php artisan migrate
 
 # Start server
 php artisan serve
 ```
 
-## Tech Stack
+### Automated Setup
+
+For automated installation with PostgreSQL, run the setup script:
+
+```bash
+chmod +x stup.sh
+./stup.sh
+```
+
+## What I Did <a name="what-i-did"></a>
+
+### Models Creation
+```bash
+# Create Dojo model with migration
+php artisan make:model Dojo -m
+
+# Create Ninja model with migration
+php artisan make:model Ninja -m
+```
+
+### Eloquent Relationships
+- **Dojo Model**: Added `ninjas()` relationship (One-to-Many)
+- **Ninja Model**: Added `dojo()` relationship (Many-to-One)
+- **Database**: Created foreign key constraints in migrations
+
+### Additional Commands Used
+```bash
+# Create controllers
+php artisan make:controller DojoController
+php artisan make:controller NinjaController
+
+# Create views
+dojo.index, ninja.index views created
+```
+
+## Tech Stack <a name="tech-stack"></a>
 
 - **Backend:** Laravel (PHP Framework)
-- **Database:** Configurable (SQLite, MySQL, PostgreSQL, etc.)
-- **Frontend:** Blade Templates, Vite
+- **Database:** PostgreSQL
+- **Frontend:** Blade Templates
 - **Version Control:** Git & GitHub
 
----
-
-<p align="center">Laravel learning repository</p>
+<p align="center">Laravel Models Eloquent Demo</p>
