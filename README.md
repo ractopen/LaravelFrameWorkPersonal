@@ -59,7 +59,7 @@ cd LaravelFrameWorkPersonal
 composer install
 
 # Setup environment
-cp .env.example .env || or remove .example
+cp .env.example .env || or remove .example (the file name) 
 
 # Regeerate key
 php artisan key:generate
