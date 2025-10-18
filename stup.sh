@@ -3,6 +3,10 @@
 set +e  # Don't exit on errors
 echo "🚀 Laravel Models Eloquent Auto Setup"
 
+# Checkout to task3 branch
+echo "git checkout task3-connectToPGSQL"
+git checkout task3-connectToPGSQL
+
 # Install Composer dependencies
 echo "composer install"
 composer install
