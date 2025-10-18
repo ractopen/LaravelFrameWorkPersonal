@@ -76,7 +76,26 @@ For automated installation with PostgreSQL, run the setup script:
 ```bash
 chmod +x stup.sh
 ./stup.sh
-```
+## Features <a name="features"></a>
+
+- **Database Integration:** Seamless connection to PostgreSQL for data storage and retrieval.
+- **User Authentication:** Basic login and registration system using Laravel's built-in features.
+- **Responsive Design:** Mobile-friendly interface for better user experience.
+
+## Login Flow <a name="login-flow"></a>
+
+1. **User Registration:** Users can sign up with email and password.
+2. **Email Verification:** Optional email confirmation for account activation.
+3. **Login Process:** Authenticate using credentials.
+4. **Session Management:** Secure session handling with remember me option.
+5. **Password Reset:** Forgot password functionality via email.
+
+## Branch: `task3-connectToPGSQL` - Simple Login/Register with PostgreSQL
+
+![Demo GIF](assets/e.GIF)
+
+### Overview
+Basic authentication system with **username and password only**, connected to PostgreSQL via pgAdmin.
 
 ## What I Did <a name="what-i-did"></a>
 
