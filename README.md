@@ -70,22 +70,14 @@ php artisan serve
 
 ## What I Did <a name="what-i-did"></a>
 
-Implemented routing in Laravel, including:
+Implemented routing in Laravel with separate controllers and a shared layout:
 
-- **Basic Routes:** Defined routes for home, about, and contact pages in `routes/web.php`.
-- **Controllers:** Created controllers to handle routing logic.
+- **Controllers:** Created `HomeController`, `AboutController`, and `ContactController`, each with an `index()` method returning their respective views.
+- **Routes:** Defined routes using controllers: `Route::get('/', [HomeController::class, 'index'])`, etc.
+- **Layout:** Created `resources/views/layout/app.blade.php` with a header (navbar with links to home, about, contact), body (`@yield('content')`), and footer.
+- **Views:** Created `home.blade.php`, `about.blade.php`, and `contact.blade.php` extending the layout with unique content.
 
-```bash
-# Create a controller
-php artisan make:controller PageController
-
-# Define routes using controllers
-Route::get('/', [PageController::class, 'home']);
-Route::get('/about', [PageController::class, 'about']);
-Route::get('/contact', [PageController::class, 'contact']);
-```
-
-This demonstrates routing with controllers in Laravel for better organization.
+This demonstrates organized routing with controllers and a shared layout in Laravel for better structure.
 
 ## Tech Stack
 
