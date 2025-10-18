@@ -149,8 +149,8 @@ def456uvw   | 2       | 192.168.1.5 | Firefox/Mac          | {user data}    | 17
 ## Tech Stack
 
 - **Backend:** Laravel (PHP Framework)
-- **Database:** Configurable (SQLite, MySQL, PostgreSQL, etc.)
-- **Frontend:** Blade Templates, Vite
+- **Database:** PostgreSQL
+- **Frontend:** Blade Templates
 - **Version Control:** Git & GitHub
 
 ---
