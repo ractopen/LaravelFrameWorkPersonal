@@ -117,8 +117,8 @@
                     @endforeach
                 </select><br><br>
 
-                <label for="ninja_skill">Skill Level (1-100):</label><br>
-                <input type="number" id="ninja_skill" name="skill" min="1" max="100" required><br><br>
+                <label for="ninja_level">Level (1-100):</label><br>
+                <input type="number" id="ninja_level" name="level" min="1" max="100" required><br><br>
 
                 <label for="ninja_bio">Bio:</label><br>
                 <textarea id="ninja_bio" name="bio" required></textarea><br><br>

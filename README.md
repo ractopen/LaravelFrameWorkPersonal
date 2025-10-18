@@ -129,7 +129,7 @@ php artisan tinker
   ```php
   $ninja = App\Models\Ninja::create([
       'name' => 'test ninja',
-      'skill' => 'stealth',
+      'level' => 5,
       'bio' => 'a skilled warrior',
       'dojo_id' => 1
   ]);

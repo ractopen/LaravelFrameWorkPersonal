@@ -17,7 +17,7 @@ class NinjaController extends Controller
     {
         $ninja = new Ninja();
         $ninja->name = $request->name;
-        $ninja->skill = $request->skill;
+        $ninja->level = $request->level;
         $ninja->bio = $request->bio;
         $ninja->dojo_id = $request->dojo_id;
         $ninja->save();

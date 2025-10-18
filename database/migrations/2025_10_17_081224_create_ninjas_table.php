@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->integer('skill');
+            $table->integer('level');
             $table->text('bio');
             $table->foreignId('dojo_id')->constrained()->onDelete('cascade');
         });

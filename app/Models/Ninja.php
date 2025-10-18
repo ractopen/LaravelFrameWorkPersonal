@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ninja extends Model
 {
-    protected $fillable = ['name', 'skill', 'bio', 'dojo_id'];
+    protected $fillable = ['name', 'level', 'bio', 'dojo_id'];
 
     // Relationship: many ninjas belong to one dojo
     public function dojo()
