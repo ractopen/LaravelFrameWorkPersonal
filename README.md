@@ -1,93 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">
+    <a href="https://aimeos.org/">
+        <img src="https://aimeos.org/fileadmin/template/icons/logo.png" alt="Aimeos logo" title="Aimeos" />
+    </a>
+</p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel">
-<img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php">
-<img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql">
+<img src="https://img.shields.io/badge/PHP-8.1+-777BB4?style=for-the-badge&logo=php">
+<img src="https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql">
+<img src="https://img.shields.io/badge/E--commerce-Aimeos-orange?style=for-the-badge">
 </p>
 
-<p align="center">
-  <a href="#repository-structure">🏗️ Repository</a> •
-  <a href="#setup-instructions">⚙️ Setup</a> •
-  <a href="#what-i-did">📝 What I Did</a> •
-  <a href="#tech-stack">🛠️ Tech Stack</a>
-</p>
+# Task 5: Laravel E-commerce Documentation
 
-# Laravel Framework Personal
+**School Task:** Document and run a Laravel e-commerce project from GitHub
 
-A Laravel learning repository for OOP school tasks. Use the `main` branch as the base for copying and creating new task branches.
+**Repository:** [Aimeos Laravel E-commerce](https://github.com/aimeos/aimeos)
 
-## Repository Structure
+## 📋 Task Instructions
 
-This project uses a branch-per-task workflow for learning Laravel concepts.
+**Objective:** Select a Laravel e-commerce repository, run it locally, and create comprehensive documentation.
 
-### Branch Organization
+**Requirements:**
+- ✅ Select one repository from [Laravel E-commerce projects](https://github.com/topics/laravel-ecommerce)
+- ✅ Run the project on local machine
+- ✅ Create system flow documentation
+- ✅ Document setup process and code structure
 
-| Branch | Purpose |
-|--------|---------|
-| [`main`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/main) | Base Laravel template for copying and creating new tasks |
-| [`task2-routing`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task2-routing) | Task 2: Routing in Laravel |
-| [`task3-connectToPGSQL`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task3-connectToPGSQL) | Task 3: Connect to PostgreSQL and implement authentication |
-| [`task4-models-eloquent`](https://github.com/ractopen/LaravelFrameWorkPersonal/tree/task4-models-eloquent) | Task 4: Models and Eloquent Relationships |
+**Selected Project:** Aimeos - THE Laravel ecommerce platform
 
-### Workflow
+## 📚 Documentation
 
-```bash
-# Copy the main branch for a new task
-git clone https://github.com/ractopen/LaravelFrameWorkPersonal.git
-cd LaravelFrameWorkPersonal
+Complete setup guide and documentation can be found in:
 
-# Create a new branch for your task
-git checkout -b task-your-task-name
+**[📖 Documentation .md/README.md](./Documentation%20.md/README.md)**
 
-# Work on the task
-# ...
+The documentation includes:
+- Prerequisites and requirements
+- Step-by-step setup instructions
+- What I did after cloning (detailed process)
+- Project structure breakdown
+- How to use Laravel features (Routing, Eloquent ORM, Blade, Controllers)
+- Login credentials for admin and customer accounts
+- Common commands and troubleshooting
+- Daily development workflow
 
-# Commit and push
-git add .
-git commit -m "Complete task: your description"
-git push -u origin task-your-task-name
-```
-
-## Setup Instructions
-
-### Quick Setup
+## 🚀 Quick Start
 
 ```bash
-# Navigate to project directory
+# Clone this branch
+git clone -b task5 https://github.com/ractopen/LaravelFrameWorkPersonal.git
 cd LaravelFrameWorkPersonal
 
-# Install dependencies
-composer install
+# Follow the complete setup guide
+# See: Documentation .md/README.md
 
-# Setup environment
-cp .env.example .env
-php artisan key:generate
-
-# Setup PostgreSQL database (make sure PostgreSQL is running)
-php artisan migrate
-
-# Start server
+# Quick run (if already set up)
 php artisan serve
 ```
 
-## What I Did <a name="what-i-did"></a>
+**Access:**
+- Shop: http://127.0.0.1:8000
+- Admin: http://127.0.0.1:8000/admin
 
-Created the base Laravel project using:
-```bash
-composer create-project laravel/laravel LaravelFrameWorkPersonal
+**Login Credentials:**
+- Admin: admin@shop.com / admin123
+- Customer: customer@example.com / customer123
+
+## 🛠️ Tech Stack
+
+- **Backend:** Laravel 11.x + PHP 8.1+
+- **E-commerce:** Aimeos package
+- **Database:** MySQL/MariaDB
+- **Frontend:** Blade templates + Vite
+- **Admin Panel:** Aimeos JQAdm
+- **API:** JSON API + GraphQL
+
+## 📁 Repository Structure
+
+```
+LaravelFrameWorkPersonal/
+├── Documentation .md/
+│   └── README.md          # Complete setup documentation
+├── README copy.md         # Original Aimeos README
+├── README.md             # This file
+├── app/                  # Laravel application
+├── config/               # Configuration files
+├── database/             # Migrations and seeds
+├── public/               # Web root
+├── resources/            # Views and assets
+├── routes/               # Application routes
+└── vendor/               # Dependencies (including Aimeos)
 ```
 
-This is the base Laravel template. No specific implementation here; use this as the starting point for your tasks.
-```
+## ✨ Features
 
-## Tech Stack
+- Multi-vendor marketplace support
+- Product catalog with categories
+- Shopping cart and checkout
+- Order management
+- Customer accounts
+- Admin panel
+- Payment gateway integration
+- Multi-language support
+- Responsive design
 
-- **Backend:** Laravel (PHP Framework)
-- **Database:** PostgreSQL
-- **Frontend:** Blade Templates
-- **Version Control:** Git & GitHub
+## 📝 What I Did
+
+1. Selected Aimeos Laravel e-commerce from GitHub
+2. Cloned the repository locally
+3. Set up the development environment
+4. Installed all dependencies (Composer & npm)
+5. Configured database and environment
+6. Ran migrations and seeded demo data
+7. Created admin and customer accounts
+8. Tested all features (shop, admin panel, checkout)
+9. Documented the entire setup process
+10. Created comprehensive documentation in `Documentation .md/`
+
+## 🎓 Learning Outcomes
+
+- Understanding Laravel e-commerce architecture
+- Working with Aimeos package
+- Database migrations and seeding
+- Laravel authentication and authorization
+- Blade templating and frontend assets
+- Admin panel management
+- Multi-vendor system concepts
 
 ---
 
-<p align="center">Laravel learning repository</p>
+**Branch:** task5  
+**Status:** ✅ Completed  
+**Date:** October 2025

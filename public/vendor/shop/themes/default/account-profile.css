@@ -1,0 +1,110 @@
+.account-profile {
+	padding: 2rem 0;
+}
+
+.account-profile h2.header {
+	text-transform: uppercase;
+	text-align: start;
+	font-weight: normal;
+	padding: 0.5rem 1rem;
+	color: var(--ai-secondary);
+	border-bottom: 1px solid var(--ai-secondary);
+}
+
+.account-profile .account-profile-address form {
+	margin: 1rem;
+}
+
+.account-profile .account-salutation {
+	padding: 4rem 0 1.5rem;
+	margin-bottom: 3rem;
+	border-bottom: 1px solid var(--ai-secondary-dark);
+	display: flex;
+	align-items: center;
+}
+
+.account-profile .account-salutation .header.profile {
+	font-size: 180%;
+	margin: 0 2rem 0 1rem;
+	font-weight: 600;
+}
+
+.account-profile .profile-salutation {
+	margin: 0;
+}
+
+.account-profile .profile-salutation .logout {
+	margin-left: 1rem;
+}
+
+.account-profile .profile-salutation::before {
+	content: "\f4e1";
+	font: normal normal normal 14px/1 bootstrap-icons;
+	text-decoration: none;
+	font-size: 165%;
+	color: var(--ai-primary-dark);
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	border: 1px solid var(--ai-primary-dark);
+	height: 2rem;
+	width: 2rem;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: .5rem;
+}
+
+.account-profile .account-salutation .btn {
+	margin: 0 1rem 0 auto;
+}
+
+.account-profile-address h3 {
+	margin: 0.5rem 1rem;
+}
+
+.account-profile-address .address-item {
+	border: 1px solid var(--ai-tertiary);
+	border-radius: 0;
+	margin: 0.5rem 0;
+	padding: 1%;
+}
+
+.account-profile-address .header {
+	justify-content: space-between;
+	display: flex;
+	padding: 1rem;
+}
+
+.account-profile-address .header .act-show:after {
+	font: normal normal normal 14px/1 bootstrap-icons;
+	content: "\f4cb";
+	font-size: 130%;
+}
+
+.account-profile-address .header .act-hide:after {
+	font: normal normal normal 14px/1 bootstrap-icons;
+	content: "\f62a";
+	font-size: 130%;
+}
+
+.account-profile .form-list .error,
+.account-profile .form-list .error a {
+	color: var(--ai-danger);
+}
+
+.account-profile .form-list .error input,
+.account-profile .form-list .error select {
+	border: 1px solid var(--ai-danger);
+}
+
+.account-profile .form-item.mandatory label {
+	font-weight: bold;
+}
+
+.account-profile .form-item label {
+	margin: 0.875rem 0;
+}
+
+.account-profile .form-item .form-control {
+	margin: 0.5rem 0;
+}

@@ -1,0 +1,103 @@
+/* Standard basket */
+
+.basket-standard {
+	padding: 2rem 0;
+}
+
+.basket-standard .header {
+	align-items: center;
+	padding: 0 1rem;
+}
+
+.basket-standard .header h1 {
+	margin: 0;
+}
+
+.basket-standard .basket-save.input-group {
+    border-bottom: 1px solid var(--ai-secondary);
+	width: auto;
+}
+
+.basket-standard .basket-save .basket-name {
+	border: none;
+}
+
+.basket-standard .basket-save .btn {
+	font-weight: bold;
+	font-size: 110%;
+	border: none;
+	width: 8rem;
+}
+
+.basket-standard-main {
+	border: 1px solid var(--ai-tertiary);
+	padding: 1rem;
+	margin: 0;
+}
+
+.basket-standard-main quantity a,
+.basket-standard-main action a {
+	text-decoration: none;
+}
+
+.basket-standard-coupon {
+	padding: 1rem !important;
+	align-items: center;
+	text-align: center;
+	margin: 0;
+}
+
+.basket-standard-coupon .header h2 {
+	font-size: 1rem;
+	margin: 10px 0;
+}
+
+.basket-standard-coupon .coupon-detail {
+	align-items: center;
+}
+
+.basket-standard-coupon .attr-item .coupon-code,
+.basket-standard-coupon .attr-item .change {
+	font-weight: bold;
+	font-size: 133%;
+	padding: 0.5rem;
+}
+
+.basket-standard-coupon .btn-primary,
+.basket-standard-coupon .btn-primary:hover {
+	background: none;
+	border: none;
+	color: var(--ai-primary);
+	font-weight: bold;
+	font-size: 110%;
+}
+
+.basket-standard-coupon .input-group {
+	border-bottom: 1px solid var(--ai-secondary);
+}
+
+.basket-standard-coupon .coupon-new .btn {
+	width: 8rem;
+}
+
+.basket-standard-coupon .coupon-new .coupon-code {
+	width: calc(100% - 8rem);
+	border: none;
+}
+
+.basket-standard-coupon .coupon-detail {
+	font-size: 125%;
+}
+
+.basket-standard-coupon .coupon-detail .name {
+	text-align: start;
+	padding: 0 0.75rem;
+}
+
+.basket-standard-coupon .coupon-detail .coupon-codes {
+	text-align: end;
+}
+
+.basket-standard-coupon .minibutton.delete:after {
+	display: inline-block;
+}
