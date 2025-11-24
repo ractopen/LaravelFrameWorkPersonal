@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: buymyclassmate/laravel-app
+    container_name: buymyclassmate-app
+    restart: unless-stopped
+    working_dir: /var/www
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/var/www
+      - ./database/database.sqlite:/var/www/database/database.sqlite
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+    networks:
+      - buymyclassmate-network
+
+networks:
+  buymyclassmate-network:
+    driver: bridge
