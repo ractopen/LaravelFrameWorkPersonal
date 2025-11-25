@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [ShopController::class, 'viewCart'])->name('shop.cart');
     Route::post('/cart/delete/{item}', [ShopController::class, 'deleteFromCart'])->name('cart.delete');
     Route::post('/buy-now/{item}', [ShopController::class, 'buyNow'])->name('shop.buynow');
+    Route::post('/buy-now/{item}/checkout', [ShopController::class, 'singleCheckout'])->name('shop.singleCheckout');
     Route::post('/checkout', [ShopController::class, 'checkout'])->name('shop.checkout');
     Route::post('/checkout/complete', [ShopController::class, 'completeOrder'])->name('shop.checkout.complete');
 });

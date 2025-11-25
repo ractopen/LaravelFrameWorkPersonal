@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model
 {
-    use HasFactory;
+    use HasFactory, \Illuminate\Database\Eloquent\SoftDeletes;
 
     protected $table = 'cart_items';
 
@@ -16,4 +16,13 @@ class CartItem extends Model
         'item_id',
         'quantity',
     ];
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

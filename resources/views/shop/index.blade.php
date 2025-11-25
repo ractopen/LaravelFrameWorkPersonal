@@ -57,8 +57,9 @@
                                 @csrf
                                 <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.4rem 0.3rem; font-size: 0.75rem;">Cart</button>
                             </form>
-                            <form action="{{ route('shop.buynow', $item) }}" method="POST">
+                            <form action="{{ route('shop.singleCheckout', $item) }}" method="POST" onsubmit="return handleBuyNow(this, '{{ $item->stock }}');">
                                 @csrf
+                                <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn btn-success" style="width: 100%; padding: 0.4rem 0.3rem; font-size: 0.75rem;">Buy</button>
                             </form>
                         </div>
@@ -103,4 +104,14 @@
         }
     }
 </style>
+
+<script>
+function handleBuyNow(form, maxStock) {
+    let qty = prompt('How many do you want to buy? (Max: ' + maxStock + ')', '1');
+    if (qty === null) return false;
+    qty = Math.max(1, Math.min(parseInt(qty), parseInt(maxStock)));
+    form.querySelector('input[name^="quantities"]').value = qty;
+    return true;
+}
+</script>
 @endsection

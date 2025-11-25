@@ -149,7 +149,7 @@ class ShopController extends Controller
 
         $expected = session('order_verification_' . $orderNumber);
         if (!$expected || (string)$expected !== (string)$providedCode) {
-            return back()->withErrors(['error' => 'Invalid verification code. Please scan the vCard and enter the 4-digit code shown.']);
+            return back()->with('error', 'Verification not succeeded. Please enter the correct 4-digit code from the QR.');
         }
         
         if (empty($selectedIds)) {
@@ -160,13 +160,34 @@ class ShopController extends Controller
                     ->where('status', 'active')
                     ->first();
 
-        if ($cart) {
+        // If single item checkout (not from cart)
+        if (!$cart) {
+            foreach ($selectedIds as $itemId) {
+                $item = Item::find($itemId);
+                if ($item) {
+                    // Deduct stock by submitted quantity
+                    $quantity = 1;
+                    if ($request->has('quantities')) {
+                        $quantities = $request->input('quantities');
+                        if (isset($quantities[$itemId])) {
+                            $quantity = max(1, (int)$quantities[$itemId]);
+                        }
+                    } elseif ($request->has('verification_code')) {
+                        // For single item checkout, quantity is in hidden input
+                        $quantity = (int)$request->input('verification_code') ? (int)$request->input('quantity', 1) : 1;
+                    } else {
+                        $quantity = (int)$request->input('quantity', 1);
+                    }
+                    $item->stock = max(0, $item->stock - $quantity);
+                    $item->save();
+                }
+            }
+        } else {
             // Deduct stock and remove items from cart
             foreach ($selectedIds as $itemId) {
                 $cartItem = CartItem::where('cart_id', $cart->id)
                                     ->where('item_id', $itemId)
                                     ->first();
-                
                 if ($cartItem) {
                     $item = Item::find($itemId);
                     if ($item) {
@@ -174,7 +195,6 @@ class ShopController extends Controller
                         $item->stock = max(0, $item->stock - $cartItem->quantity);
                         $item->save();
                     }
-                    
                     // Remove from cart
                     $cartItem->delete();
                 }
@@ -209,6 +229,8 @@ class ShopController extends Controller
             return back()->withErrors(['error' => 'This item is out of stock.']);
         }
 
+        $quantity = max(1, min((int)$request->input('quantity', 1), $item->stock));
+
         $cart = Cart::firstOrCreate(
             ['user_id' => Auth::id(), 'status' => 'active']
         );
@@ -219,19 +241,45 @@ class ShopController extends Controller
 
         if ($cartItem) {
             // Check if incrementing would exceed stock
-            if ($cartItem->quantity + 1 > $item->stock) {
+            if ($cartItem->quantity + $quantity > $item->stock) {
                 return back()->withErrors(['error' => 'Not enough stock available.']);
             }
-            $cartItem->increment('quantity');
+            $cartItem->quantity += $quantity;
+            $cartItem->save();
         } else {
             CartItem::create([
                 'cart_id' => $cart->id,
                 'item_id' => $item->id,
-                'quantity' => 1,
+                'quantity' => $quantity,
             ]);
         }
 
         // Redirect directly to checkout with this item selected
         return redirect()->route('shop.checkout')->with('success', 'Item added to cart. Proceeding to checkout...');
+    }
+
+    public function singleCheckout(Request $request, Item $item)
+    {
+        if ($request->method() !== 'POST') {
+            // Redirect to store if not POST (e.g., refresh or direct visit)
+            return redirect()->route('shop.index');
+        }
+        $quantity = max(1, min((int)$request->input('quantity', 1), $item->stock));
+        if ($item->stock < 1) {
+            return back()->withErrors(['error' => 'This item is out of stock.']);
+        }
+        if ($quantity > $item->stock) {
+            return back()->withErrors(['error' => 'Not enough stock available.']);
+        }
+        // Prepare single item for checkout view
+        $selectedItems = collect([$item]);
+        $item->pivot = (object)[ 'quantity' => $quantity ];
+        $total = $item->price * $quantity;
+        $orderNumber = 'ORD-' . strtoupper(substr(md5(Auth::user()->username . time()), 0, 8));
+        $verificationCode = rand(1000, 9999);
+        session(['order_verification_' . $orderNumber => $verificationCode]);
+        $qrData = 'Order: ' . $orderNumber . ', Item: ' . $item->name . ', Qty: ' . $quantity . ', Code: ' . $verificationCode;
+        $selectedIds = [$item->id];
+        return view('shop.checkout', compact('selectedItems', 'qrData', 'total', 'orderNumber', 'verificationCode', 'selectedIds'));
     }
 }

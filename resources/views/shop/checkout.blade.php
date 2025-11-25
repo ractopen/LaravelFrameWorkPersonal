@@ -6,16 +6,10 @@
         <h2 style="margin-bottom: 1.5rem; text-align: center;">Scan to Pay</h2>
         
         <div style="text-align: center; margin-bottom: 2rem;">
-            <p style="color: var(--gray); margin-bottom: 1rem;">Scan the QR code to save receipt as contact:</p>
+            <p style="color: var(--gray); margin-bottom: 1rem;">Scan the QR code to save receipt</p>
             <div id="qrcode" style="background: white; padding: 1.5rem; display: inline-block; border: 2px solid var(--border); border-radius: 0.5rem; margin-bottom: 1rem;"></div>
             <p style="font-size: 0.9rem; color: var(--gray);">Order: <strong style="color: var(--text);">{{ $orderNumber }}</strong></p>
         </div>
-
-        <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; text-align: center;">
-            <p style="margin: 0 0 0.5rem 0; color: var(--gray);">Verification Code:</p>
-            <p style="margin: 0; font-size: 2rem; font-weight: bold; color: var(--primary);">{{ $verificationCode }}</p>
-        </div>
-
         <div style="margin-bottom: 1.5rem;">
             <h3 style="margin-bottom: 1rem;">Order Items</h3>
             <div style="display: grid; gap: 1rem;">
@@ -64,6 +58,10 @@
         </form>
     </div>
 </div>
+
+@if(session('error') && old('verification_code'))
+    <script>alert("{{ session('error') }}");</script>
+@endif
 
 <script src="{{ asset('js/qrcode.min.js') }}"></script>
 <script>

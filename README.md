@@ -1,522 +1,195 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel E-Commerce Documentation
 
-<p align="center">
-<img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel">
-<img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php">
-<img src="https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite">
-</p>
-
-<p align="center">
-  <a href="#overview">📋 Overview</a> •
-  <a href="#setup-instructions">⚙️ Setup</a> •
-  <a href="#what-i-did">📝 What I Did</a> •
-  <a href="#how-it-works">🔧 How It Works</a> •
-  <a href="#database-schema">🗄️ Database</a> •
-  <a href="#tech-stack">🛠️ Tech Stack</a>
-</p>
-
-# Buy My Classmate Inc - E-Commerce Store
-
-A simple e-commerce platform built with Laravel and SQLite for the OOP Finals project. Features offline QR code receipts, theme persistence, and animated Easter eggs.
+## Overview
+This project is a Laravel-based e-commerce platform for buying and selling "classmates" as items. It features user authentication, shopping cart, checkout with QR code receipts, admin panel, announcements, inbox messages, and theme persistence.
 
 ---
 
-## Overview <a name="overview"></a>
+## Models
 
-**Buy My Classmate Inc** is a Laravel-based e-commerce store that allows users to browse products, manage shopping carts with selective checkout, and complete purchases using an offline QR code system. The application includes a full-featured admin panel and unique UI enhancements like theme switching and animated backgrounds.
+### User
+- **Fields:** id, name, username, email, password, is_admin, theme, timestamps
+- **Relationships:**
+  - `carts()`: Has many carts
+- **Cascade Soft Delete:**
+  - When a user is deleted, all their carts, cart items, and related items are soft deleted.
+- **Methods:**
+  - `carts()`: Returns user's carts
+  - `booted()`: Handles cascade soft delete
 
-### Key Features
-- 🛒 **Shopping Cart** with selective item checkout and quantity adjustment
-- 📱 **Offline QR Codes** using data URIs (no internet required!)
-- 🌓 **Dark/Light Mode** with user preference persistence
-- ✨ **Easter Eggs**: Animated star/sakura backgrounds
-- 📢 **Announcement System** with scrolling marquee
-- 📬 **Inbox Messages** for admin-to-user communication
-- 👤 **User Authentication** with unique username/email validation
-- 🔐 **Admin Panel** for managing products, users, and content
+### Cart
+- **Fields:** id, user_id, status, timestamps
+- **Relationships:**
+  - `cartItems()`: Has many cart items
+  - `items()`: Belongs to many items (via cart_items)
+- **Cascade Soft Delete:**
+  - When a cart is deleted, all its cart items and related items are soft deleted.
+- **Methods:**
+  - `cartItems()`: Returns cart's items
+  - `booted()`: Handles cascade soft delete
 
----
+### CartItem
+- **Fields:** id, cart_id, item_id, quantity, timestamps
+- **Relationships:**
+  - `cart()`: Belongs to cart
+  - `item()`: Belongs to item
 
-## Setup Instructions <a name="setup-instructions"></a>
+### Item
+- **Fields:** id, name, price, description, image_path, stock, timestamps
+- **Relationships:**
+  - `cartItems()`: Has many cart items
+- **Cascade Soft Delete:**
+  - When an item is deleted, all its cart items and related carts are soft deleted.
+- **Methods:**
+  - `cartItems()`: Returns item's cart items
+  - `booted()`: Handles cascade soft delete
 
-### Prerequisites
-- PHP 8.1 or higher
-- Composer
+### Announcement
+- **Fields:** id, message, is_active, timestamps
 
-### Quick Setup
-
-```bash
-# Navigate to project directory
-cd myapp
-
-# Install dependencies
-composer install
-
-# Setup environment
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-
-# Create SQLite database file
-touch database/database.sqlite
-
-# Run migrations and seed database
-php artisan migrate:fresh --seed
-
-# Create storage symlink for image uploads
-php artisan storage:link
-
-# Start development server
-php artisan serve
-```
-
-### Default Credentials
-- **Admin Username**: `admin`
-- **Admin Password**: `admin`
-
-### Access Points
-- **Shop**: http://127.0.0.1:8000
-- **Admin Panel**: Login with admin credentials, then navigate to Admin link
+### InboxMessage
+- **Fields:** id, message, timestamps
 
 ---
 
-## What I Did <a name="what-i-did"></a>
+## Controllers
 
-### Models & Database
+### AuthController
+- Handles user registration, login, logout, and theme update.
+- **register(Request $request):** Validates and creates a new user.
+- **login(Request $request):** Authenticates user.
+- **logout():** Logs out user.
+- **updateTheme(Request $request):** Updates user's theme.
 
-```bash
-# Created models with migrations
-php artisan make:model User -m
-php artisan make:model Item -m
-php artisan make:model Cart -m
-php artisan make:model CartItem -m
-php artisan make:model Announcement -m
-php artisan make:model InboxMessage -m
-```
+### ShopController
+- Handles shop browsing, cart management, buying, and checkout.
+- **index():** Shows shop items.
+- **addToCart(Request $request, Item $item):** Adds item to cart.
+- **viewCart():** Shows user's cart.
+- **deleteFromCart(Item $item):** Removes item from cart.
+- **buyNow(Request $request, Item $item):** Adds item to cart and redirects to checkout.
+- **singleCheckout(Request $request, Item $item):** Shows checkout for a single item and quantity.
+- **checkout(Request $request):** Handles cart checkout with selected items and quantities.
+- **completeOrder(Request $request):** Finalizes order, deducts stock, and removes items from cart.
 
-**Why SQLite?**
-- ✅ No server setup required (file-based)
-- ✅ Perfect for development and small projects
-- ✅ Easy to backup (just copy the file)
-- ✅ No configuration needed
-
-**Why I removed `email_verified_at` and `remember_token`:**
-- ❌ No email sending functionality in this project
-- ❌ "Remember Me" feature not needed
-- ✅ Simplifies the database schema
-- ✅ Reduces unnecessary columns
-
-**Why I removed `password_reset_tokens` and `sessions` tables:**
-- ❌ No password reset feature implemented
-- ✅ Using file-based sessions instead (simpler, no DB queries)
-- ✅ Configured in `.env`: `SESSION_DRIVER=file`
-
-### Controllers
-
-```bash
-# Created controllers
-php artisan make:controller AuthController
-php artisan make:controller ShopController
-php artisan make:controller AdminController
-```
-
-**Why manual authentication instead of Laravel Breeze/Jetstream?**
-- ✅ Full control over validation rules (unique username AND email)
-- ✅ No password confirmation requirement (as requested)
-- ✅ Custom redirect logic (admin → dashboard, user → shop)
-- ✅ Lighter codebase without extra packages
-
-### Frontend Assets
-
-**Created custom JavaScript files:**
-- `public/js/effects.js` - Star and Sakura animations
-- `public/js/qrcode.min.js` - Offline QR code generation
-
-**Why use vanilla JavaScript instead of a framework?**
-- ✅ No build process needed
-- ✅ Faster page loads (no large framework bundles)
-- ✅ Easier to understand for beginners
-- ✅ Perfect for simple interactions
-
-**Why data URIs for QR codes?**
-- ✅ Works 100% offline (no API calls)
-- ✅ HTML embedded directly in QR code
-- ✅ Phone can display receipt without internet
-- ✅ No external dependencies
-
-### Blade Templates
-
-Created views for:
-- Authentication (`login.blade.php`, `register.blade.php`)
-- Shop (`index.blade.php`, `cart.blade.php`, `checkout.blade.php`)
-- Admin (`dashboard.blade.php`)
-- Layout (`layouts/app.blade.php`)
-- Contact (`contact.blade.php`)
-
-**Why Blade instead of Vue/React?**
-- ✅ Server-side rendering (better SEO)
-- ✅ No JavaScript build step
-- ✅ Simpler deployment
-- ✅ Laravel's native templating engine
+### AdminController
+- Handles admin dashboard, item/user management, announcements, and inbox messages.
+- **dashboard():** Shows admin dashboard.
+- **storeItem(Request $request):** Adds new item.
+- **updateItem(Request $request, Item $item):** Updates item.
+- **deleteItem(Item $item):** Deletes item.
+- **deleteUser(User $user):** Deletes user.
+- **storeAnnouncement(Request $request):** Adds announcement.
+- **deleteAnnouncement(Announcement $announcement):** Deletes announcement.
+- **storeInboxMessage(Request $request):** Adds inbox message.
+- **deleteInboxMessage(InboxMessage $inboxMessage):** Deletes inbox message.
 
 ---
 
-## How It Works <a name="how-it-works"></a>
+## Routes
 
-### 1. User Registration & Login
-
-```php
-// AuthController.php
-public function register(Request $request)
-{
-    // Validate unique username AND email
-    $request->validate([
-        'username' => 'required|string|unique:users',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|string', // No min length!
-    ]);
-    
-    // Create user with hashed password
-    $user = User::create([
-        'name' => $request->name,
-        'username' => $request->username,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
-    
-    // Auto-login after registration
-    Auth::login($user);
-    
-    return redirect()->route('shop.index');
-}
-```
-
-**Why no password length requirement?**
-- As per project requirements (user requested flexibility)
-- Still uses bcrypt hashing for security
-
-### 2. Shopping Cart with Selective Checkout
-
-```php
-// ShopController.php
-public function checkout(Request $request)
-{
-    // Get selected items and their quantities
-    $selectedIds = $request->input('selected_items', []);
-    $quantities = $request->input('quantities', []);
-    
-    // Filter cart items based on selection
-    $selectedItems = $cart->items->whereIn('id', $selectedIds)
-        ->map(function($item) use ($quantities) {
-            // Use submitted quantity
-            if (isset($quantities[$item->id])) {
-                $item->pivot->quantity = max(1, (int)$quantities[$item->id]);
-            }
-            return $item;
-        });
-    
-    // Generate QR code with receipt
-    // ...
-}
-```
-
-**Why allow quantity changes at checkout?**
-- ✅ Better UX (no need to go back to cart)
-- ✅ Users can adjust before final purchase
-- ✅ Common in modern e-commerce
-
-**Why selective checkout (checkboxes)?**
-- ✅ Users can buy some items now, save others for later
-- ✅ More flexible than "buy all" approach
-- ✅ Reduces cart abandonment
-
-### 3. Offline QR Code System
-
-```php
-// Generate compact HTML receipt
-$html = '<!DOCTYPE html><html>...receipt...</html>';
-
-// Encode as data URI
-$qrData = 'data:text/html,' . rawurlencode($html);
-
-// QR library creates QR code
-new QRCode(document.getElementById("qrcode"), {
-    text: qrData,
-    width: 200,
-    height: 200
-});
-```
-
-**How it works:**
-1. PHP generates HTML receipt with order details
-2. HTML is URL-encoded into a data URI
-3. QR code contains the data URI
-4. When scanned, phone opens the HTML directly
-5. No internet needed - HTML is in the QR code itself!
-
-**Why this approach?**
-- ✅ Works offline (perfect for demos)
-- ✅ No payment gateway needed
-- ✅ Educational demonstration of data URIs
-- ✅ Unique and impressive feature
-
-### 4. Theme Persistence
-
-```javascript
-// When user toggles theme
-toggleBtn.addEventListener('click', () => {
-    const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-    
-    // Save to localStorage (for guests)
-    localStorage.setItem('theme', newTheme);
-    
-    // Save to database (for logged-in users)
-    if (authenticated) {
-        fetch('/theme', {
-            method: 'POST',
-            body: JSON.stringify({ theme: newTheme })
-        });
-    }
-});
-```
-
-**Why save theme to database?**
-- ✅ Persists across devices for logged-in users
-- ✅ Better UX (theme follows the user)
-- ✅ Falls back to localStorage for guests
-
-### 5. Easter Egg System
-
-```javascript
-// Click "Inc" in logo to toggle
-easterEggBtn.addEventListener('click', () => {
-    const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    
-    if (theme === 'dark') {
-        window.starBg.init(); // Falling stars
-    } else {
-        window.sakuraBg.init(); // Falling petals
-    }
-});
-```
-
-**Why different effects for each theme?**
-- ✅ Stars fit dark mode aesthetic
-- ✅ Sakura petals fit light mode aesthetic
-- ✅ Adds polish and personality
-- ✅ Fun discovery for users
-
-### 6. Inbox System
-
-```javascript
-// Check localStorage for dismissed messages
-const dismissedMessages = JSON.parse(localStorage.getItem('dismissedMessages') || '[]');
-
-// Show only non-dismissed messages
-document.querySelectorAll('.inbox-message').forEach(msg => {
-    const id = parseInt(msg.dataset.id);
-    if (!dismissedMessages.includes(id)) {
-        msg.style.display = 'block';
-    }
-});
-```
-
-**Why use localStorage for dismissal?**
-- ✅ No database writes needed
-- ✅ Instant response (no server round-trip)
-- ✅ Per-browser persistence (user can dismiss on phone, still see on desktop)
-- ✅ Admin can still delete message from database
+- `/` - Shop index
+- `/register` - User registration
+- `/login` - User login
+- `/cart` - View cart
+- `/cart/add/{item}` - Add item to cart
+- `/cart/delete/{item}` - Remove item from cart
+- `/buy-now/{item}` - Buy now (add to cart and checkout)
+- `/buy-now/{item}/checkout` - Single item checkout
+- `/checkout` - Cart checkout
+- `/checkout/complete` - Complete order
+- `/admin/dashboard` - Admin dashboard
+- `/admin/items` - Manage items
+- `/admin/users` - Manage users
+- `/admin/announcements` - Manage announcements
+- `/admin/inbox` - Manage inbox messages
 
 ---
 
-## Database Schema <a name="database-schema"></a>
+## Cascade Soft Delete Logic
 
-### Tables Overview
-
-| Table | Purpose | Key Relationships |
-|-------|---------|-------------------|
-| `users` | User accounts | Has many carts |
-| `items` | Products for sale | Belongs to many carts |
-| `carts` | Shopping sessions | Belongs to user, has many items |
-| `cart_items` | Cart-item pivot | Links carts and items |
-| `announcements` | Header messages | Standalone |
-| `inbox_messages` | User notifications | Standalone |
-| `migrations` | Laravel tracking | System table |
-
-### Detailed Schema
-
-#### `users` Table
-```sql
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    username VARCHAR UNIQUE NOT NULL,
-    email VARCHAR UNIQUE NOT NULL,
-    is_admin BOOLEAN DEFAULT 0,
-    password VARCHAR NOT NULL,
-    theme VARCHAR DEFAULT 'light',
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
-```
-
-**Why `theme` column?**
-- Stores user's preferred theme (light/dark)
-- Syncs across devices when logged in
-
-**Why `is_admin` instead of roles table?**
-- ✅ Simple boolean is sufficient for this project
-- ✅ No need for complex role-based access control
-- ✅ Easier to query: `WHERE is_admin = 1`
-
-#### `items` Table
-```sql
-CREATE TABLE items (
-    id INTEGER PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    description TEXT,
-    image_path VARCHAR,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
-```
-
-**Why nullable `image_path`?**
-- ✅ Items can exist without images
-- ✅ Fallback emoji (📷) shown in UI
-- ✅ Flexible for quick admin entry
-
-#### `carts` Table
-```sql
-CREATE TABLE carts (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    status VARCHAR DEFAULT 'active',
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-```
-
-**Why `status` column?**
-- Tracks cart state (active/completed)
-- Could extend to: abandoned, pending, etc.
-- Enables order history in future
-
-#### `cart_items` Table (Pivot)
-```sql
-CREATE TABLE cart_items (
-    id INTEGER PRIMARY KEY,
-    cart_id INTEGER NOT NULL,
-    item_id INTEGER NOT NULL,
-    quantity INTEGER DEFAULT 1,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    FOREIGN KEY (cart_id) REFERENCES carts(id),
-    FOREIGN KEY (item_id) REFERENCES items(id)
-);
-```
-
-**Why separate pivot table?**
-- ✅ Many-to-many relationship (cart ↔ items)
-- ✅ Stores quantity per item
-- ✅ Laravel Eloquent best practice
-
-#### `announcements` Table
-```sql
-CREATE TABLE announcements (
-    id INTEGER PRIMARY KEY,
-    message TEXT NOT NULL,
-    is_active BOOLEAN DEFAULT 1,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
-```
-
-**Why `is_active` column?**
-- Admin can disable without deleting
-- Could schedule announcements in future
-- Soft delete alternative
-
-#### `inbox_messages` Table
-```sql
-CREATE TABLE inbox_messages (
-    id INTEGER PRIMARY KEY,
-    message TEXT NOT NULL,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
-```
-
-**Why no user_id foreign key?**
-- ✅ Messages are global (sent to all users)
-- ✅ Dismissal tracked in browser (localStorage)
-- ✅ Simpler than per-user message records
+- When a User is soft deleted, all their Carts, CartItems, and related Items are soft deleted.
+- When a Cart is soft deleted, all its CartItems and related Items are soft deleted.
+- When an Item is soft deleted, all its CartItems and related Carts are soft deleted.
+- Relationships in CartItem allow traversing to both Cart and Item for deep cascade.
 
 ---
 
-## Tech Stack <a name="tech-stack"></a>
+## Blade Views
 
-### Backend
-- **Framework**: Laravel 11.x
-- **Language**: PHP 8.2+
-- **Database**: SQLite (file-based)
-- **Authentication**: Custom (manual implementation)
-- **Session Storage**: File-based
-
-### Frontend
-- **Templating**: Blade (Laravel's engine)
-- **Styling**: Vanilla CSS with CSS Variables
-- **JavaScript**: Vanilla JS (no framework)
-- **Fonts**: Google Fonts (Inter)
-
-### Libraries & Tools
-- **QR Code**: qrcode.min.js (client-side generation)
-- **Version Control**: Git
-- **Package Manager**: Composer
-
-### Why These Choices?
-
-**SQLite over MySQL/PostgreSQL:**
-- ✅ Zero configuration
-- ✅ Single file database
-- ✅ Perfect for development
-- ✅ Easy to share/backup
-
-**File Sessions over Database:**
-- ✅ Faster (no DB queries)
-- ✅ Simpler setup
-- ✅ Adequate for small apps
-
-**Vanilla CSS over Tailwind:**
-- ✅ Full control over styles
-- ✅ No build process
-- ✅ Easier to customize
-- ✅ Better for learning
-
-**Vanilla JS over Vue/React:**
-- ✅ No compilation needed
-- ✅ Faster page loads
-- ✅ Simpler debugging
-- ✅ Educational value
+- `shop/index.blade.php` - Shop browsing and buying
+- `shop/cart.blade.php` - Cart management
+- `shop/checkout.blade.php` - Checkout and QR code receipt
+- `auth/login.blade.php` - Login
+- `auth/register.blade.php` - Register
+- `admin/dashboard.blade.php` - Admin panel
+- `contact.blade.php` - Contact page
+- `layouts/app.blade.php` - Main layout
 
 ---
 
-## Project Information
+## Other Features
 
-**Developer**: Royette Andrei C. Telar  
-**Course**: CS21A | 2nd Year BSCS  
-**Project**: Object Oriented Programming (OOP) Finals  
-
-**Message from the Developer**:
-> "This project was built with dedication for the Object Oriented Programming (OOP) Finals. It represents the culmination of hard work, sleepless nights, and a passion for coding. To my classmates and professors, thank you for the support and knowledge shared throughout this journey."
+- **Theme Persistence:** User theme saved in DB and localStorage
+- **QR Code Receipts:** Offline QR code with order details
+- **Inbox System:** Admin messages, dismissible via localStorage
+- **Announcement System:** Marquee for active announcements
+- **Easter Eggs:** Animated backgrounds for fun
 
 ---
 
-## License
+## How to Understand the Code
+- Each model and controller is documented above with its main functions and relationships.
+- Cascade logic is implemented in the `booted()` method of models.
+- Blade views are organized by feature (shop, cart, checkout, admin, auth).
+- All routes are defined in `routes/web.php` and grouped by feature.
 
-This project is for educational purposes only.
+---
 
-<p align="center">Made with ❤️ for OOP Finals</p>
+## For More Info
+- See comments in each model/controller for further details.
+- Explore Blade views for UI logic and interactions.
+- Review migration files for database structure.
+
+---
+
+## UI & User Flow
+
+### Shop Browsing
+- Users see a grid of items with images, names, descriptions, prices, and stock.
+- Each item has a "Cart" button and a "Buy" button.
+- "Buy" prompts for quantity, then takes user directly to checkout for that item.
+
+### Cart
+- Users can add items to their cart and view all items in their cart.
+- Cart page allows removing items and adjusting quantities.
+
+### Checkout
+- Checkout page displays selected items, quantities, and total price.
+- Generates a QR code containing the order receipt (offline, data URI).
+- User must enter a 4-digit verification code from the QR to complete the order.
+- If the code is incorrect, a popup alert says "Verification not succeeded. Please enter the correct 4-digit code from the QR."
+
+### Admin Panel
+- Admins can add, update, and delete items and users.
+- Admins can post announcements and inbox messages.
+
+### Theme & Effects
+- Users can toggle dark/light mode; theme is saved in DB and localStorage.
+- Clicking "Inc" in the logo triggers animated backgrounds (stars for dark, sakura for light).
+
+### Announcements & Inbox
+- Announcements appear as a scrolling marquee.
+- Inbox messages can be dismissed (tracked in localStorage).
+
+---
+
+## Data Flow & Interactions
+- All actions (add to cart, buy, checkout, admin changes) are handled via POST requests for security.
+- Cascade soft deletes ensure all related data is hidden but not removed from the database.
+- QR code receipts work offline and encode order details for easy sharing.
+- Verification code is required to complete checkout, ensuring user confirmation.
+
+---
+
+Made for OOP Finals by Royette Andrei C. Telar
