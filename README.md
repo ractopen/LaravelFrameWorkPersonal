@@ -1,17 +1,16 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel">
-<img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php">
-<img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql">
-</p>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Laravel%20Personal%20🚀&fontSize=42&fontAlignY=32&desc=School%20Activity%20|%20Learning%20Full-Stack%20Development&descAlignY=51&descAlign=50&animation=twinkling"/>
 
-<p align="center">
-  <a href="#repository-structure">🏗️ Repository</a> •
-  <a href="#setup-instructions">⚙️ Setup</a> •
-  <a href="#what-i-did">📝 What I Did</a> •
-  <a href="#tech-stack">🛠️ Tech Stack</a>
-</p>
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00D4FF&center=true&vCenter=true&width=435&lines=Laravel+Framework;PostgreSQL+Database;Branch-per-Task+Workflow;OOP+School+Tasks)](https://git.io/typing-svg)
+
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
+</div>
+
+---
 
 # Laravel Framework Personal
 
